@@ -109,9 +109,9 @@ public class MainApplication extends Application {
     @Override
     public void stop() throws Exception {
         System.out.println("调用了stop方法");
-       /* ProgramController.stop();
+        ProgramController.stop();
         //最后再关闭连接
-        DbUtil.closeDataSource();*/
+        DbUtil.closeDataSource();
     }
 
     public static void main(String[] args) {
