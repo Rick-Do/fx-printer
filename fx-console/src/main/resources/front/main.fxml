@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.fxprinter.controller.MainController">
+    <BorderPane>
+        <top>
+            <HBox styleClass="top-bar" prefHeight="20">
+                <Label text="FxPrinter" styleClass="logo-label"/>
+            </HBox>
+        </top>
+        <left>
+            <StackPane styleClass="nav-container">
+                <fx:include fx:id="navContent" source="component/nav.fxml"/>
+            </StackPane>
+        </left>
+        <center>
+            <StackPane fx:id="contentPane" styleClass="content-pane" />
+        </center>
+    </BorderPane>
+
+    <stylesheets>
+        <URL value="@./styles/main.css"/>
+    </stylesheets>
+</StackPane>

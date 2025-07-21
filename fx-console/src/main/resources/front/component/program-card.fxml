@@ -1,0 +1,21 @@
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.Pane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.fxprinter.controller.ProgramCardController"
+            styleClass="program-card-pane"
+            fx:id="root">
+    <top>
+        <StackPane fx:id="topPane" />
+    </top>
+    <center>
+        <StackPane fx:id="centerPane" />
+    </center>
+    <bottom>
+        <StackPane fx:id="bottomPane" />
+    </bottom>
+    <stylesheets>
+        <URL value="@../styles/program-card.css" />
+    </stylesheets>
+</BorderPane>

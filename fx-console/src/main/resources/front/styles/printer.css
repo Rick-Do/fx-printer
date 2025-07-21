@@ -1,0 +1,73 @@
+/* ===== 基础变量 ===== */
+
+.print-refresh-button {
+    -fx-background-color: #f5f5f5;
+    -fx-min-width: 75px;
+    -fx-min-height: 35px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+    -fx-background-position: center;
+    -fx-text-alignment: center;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+.print-refresh-button:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+.print-filter-text {
+    -fx-min-width: 75px;
+    -fx-min-height: 35px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+    -fx-background-position: center;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 1px;
+}
+
+.printer-flow-pane {
+    -fx-background-radius: 8;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-color: transparent;
+    -fx-padding: 20 0 30 0
+}
+
+.printer-content-scroll {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-fit-to-height: true;
+    -fx-border-radius: 8;
+    -fx-padding: 10px 15px 10px 15px;
+}
+
+.printer-content-scroll .content {
+    -fx-background-color: transparent;
+    -fx-text-alignment: center;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.printer-content-scroll .viewport {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+/*滚动条滑块*/
+.printer-content-scroll .scroll-bar  .thumb {
+    -fx-background-color: #1296db;
+    -fx-background-radius: 7px;
+}
+
+
+/* 滚动面板的角落区域 */
+.printer-content-scroll .scroll-pane .corner {
+    -fx-background-color: transparent;
+}
+
+.printer-card {
+    -fx-cursor: hand;
+}
+
+.printer-card:hover {
+    -fx-background-color: #f5f5f5;
+}

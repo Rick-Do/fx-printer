@@ -1,0 +1,109 @@
+/* 容器样式 */
+.rocketmq-container {
+    -fx-padding: 20px;
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0.5, 0, 1);
+    -fx-alignment: center;
+}
+
+/* 主标题样式 */
+.rocketmq-main-title {
+    -fx-font-family: "Microsoft YaHei UI", "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-fill: #333333;
+}
+
+/* 搜索框样式 */
+.rocketmq-search-field {
+    -fx-min-width: 200px;
+    -fx-min-height: 38px;
+    -fx-padding: 0 15px;
+    -fx-font-family: "Microsoft YaHei UI", "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-radius: 14px;
+    -fx-border-radius: 14px;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1.5;
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: #9E9E9E;
+}
+
+/* 鼠标悬停在搜索框上的样式 */
+.rocketmq-search-field:hover {
+    -fx-border-color: #BDBDBD;
+}
+
+/* 焦点在搜索框上的样式 */
+.rocketmq-search-field:focused {
+    -fx-border-color: #1976D2;
+    -fx-effect: dropshadow(gaussian, rgba(25,118,210,0.2), 4, 0.3, 0, 1);
+}
+
+/*下拉选项样式*/
+/* 下拉框基础样式 */
+.rocketmq-combobox {
+    -fx-pref-width: 220px;
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-border-color: #ced4da;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 5px;
+}
+
+/* 下拉框按钮区域 */
+.rocketmq-combobox .arrow-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 0 0px;
+}
+
+/* 下拉框箭头图标 */
+.rocketmq-combobox .arrow {
+    -fx-background-color: #495057;
+}
+
+
+
+/* 文本框区域 */
+.rocketmq-combobox .text-field {
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #212529;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+/* 下拉列表弹出框 */
+.rocketmq-combobox .list-view {
+    -fx-background-color: white;
+    -fx-border-color: #ced4da;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 0);
+}
+
+/* 列表项单元格 */
+.rocketmq-combobox .list-cell {
+    -fx-padding: 5 10;
+    -fx-font-size: 14px;
+    -fx-text-fill: #212529;
+}
+
+/* 列表项悬停效果 */
+.rocketmq-combobox .list-cell:hover {
+    -fx-background-color: #e9ecef;
+}
+
+/* 列表项选中效果 */
+.rocketmq-combobox .list-cell:selected {
+    -fx-background-color: transparent;
+    -fx-text-fill: #0d6efd;
+}
+
+.rocketmq-button {
+
+}

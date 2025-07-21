@@ -1,0 +1,108 @@
+
+.setting-area {
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-background-color: #ffffff;
+}
+
+/*导航区域*/
+
+/* 内容区域 */
+.setting-content-scroll {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-fit-to-height: true;
+    -fx-border-radius: 8;
+    -fx-padding: 10px 15px 10px 15px;
+}
+
+.setting-content-scroll .content {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.setting-content-scroll .viewport {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+/*滚动条滑块*/
+.setting-content-scroll .scroll-bar  .thumb {
+    -fx-background-color: #1296db;
+    -fx-background-radius: 7px;
+}
+
+
+/* 滚动面板的角落区域 */
+.setting-content-scroll .scroll-pane .corner {
+    -fx-background-color: transparent;
+}
+
+/* 导航栏 */
+.setting-nav-bar {
+    -fx-padding: 20px 30px;
+    -fx-font-size: 14;
+    -fx-border-width: 0 0 0px 0;
+    -fx-background-radius: 8;
+}
+
+.setting-toggle-button {
+    -fx-background-color: transparent;
+    -fx-border-radius: 0;
+    -fx-padding: 5px 10px;
+    -fx-font-weight: normal;
+}
+
+.setting-toggle-button:selected {
+    -fx-font-weight: bold;
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: #2e7d32; /* 绿色下边框 */
+    -fx-text-fill: #000;
+}
+
+ .setting-toggle-button:hover {
+     -fx-cursor: hand;
+}
+.setting-button-container {
+    -fx-background-color: #f1f1f1;
+    -fx-background-radius: 8;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 8;
+    -fx-min-height: 50px;
+    -fx-padding: 10px 20px 10px 20px;
+}
+
+/* 保存按钮 */
+.setting-button-save {
+    -fx-background-color: #1976d2;
+    -fx-min-width: 74px;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+    -fx-background-radius: 7px;
+    -fx-padding: 10px 15px;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+
+/* 撤销按钮 */
+.setting-button-cancel {
+    -fx-background-color: #f5f5f5;
+    -fx-min-width: 110px;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+    -fx-background-radius: 7px;
+    -fx-padding: 10px 15px;
+    -fx-text-fill: black;
+    -fx-cursor: hand;
+}
+
+.setting-button-save:hover {
+    -fx-background-color: #1565c0;
+}
+
+.setting-button-cancel:hover {
+    -fx-background-color: #e0e0e0;
+}

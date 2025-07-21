@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<BorderPane  xmlns="http://javafx.com/javafx/17"
+          xmlns:fx="http://javafx.com/fxml/1"
+          style="-fx-padding: 30px 30px"
+          fx:controller="com.fxprinter.controller.PrinterController">
+    <!-- 第一行 -->
+    <top>
+        <HBox spacing="10">
+            <Button text="刷新" fx:id="refresh" styleClass="print-refresh-button" />
+            <TextField fx:id="filerText" promptText="请输入打印机名称过滤" styleClass="print-filter-text"  />
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane  styleClass="printer-content-scroll" fx:id="stackPaneContainer" fitToWidth="true">
+            <FlowPane fx:id="flowPane" styleClass="printer-flow-pane" vgap="10" hgap="10"   />
+        </ScrollPane>
+    </center>
+
+
+    <stylesheets>
+        <URL value="@../styles/printer.css" />
+    </stylesheets>
+</BorderPane>

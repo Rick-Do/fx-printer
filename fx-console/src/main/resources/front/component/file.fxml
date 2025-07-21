@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns:fx="http://javafx.com/fxml">
+    <VBox
+          styleClass="file-list-view"
+          alignment="CENTER"
+          spacing="10">
+
+        <Label text="我的文件" styleClass="file-list-title"/>
+        <Label text="暂无文件，可通过打印方式进行添加打印文件" styleClass="file-list-hint"/>
+    </VBox>
+</StackPane>

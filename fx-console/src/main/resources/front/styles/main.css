@@ -1,0 +1,205 @@
+/* 全局样式 */
+.root {
+    -fx-font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    -fx-background-color: #f0f2f5;
+    display: flex;
+}
+
+/* 顶部工具栏 */
+.top-bar {
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 10 20;
+    -fx-alignment: center-left;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 0);
+}
+
+.logo-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1890ff;
+}
+
+.new-button {
+    -fx-background-color: #1890ff;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-cursor: hand;
+    -fx-margin: 0 15 0 30;
+}
+
+.search-button {
+    -fx-background-color: #f5f7fa;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-padding: 5 15;
+    -fx-border-color: #d9d9d9;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+}
+
+.search-label {
+    -fx-text-fill: #8c8c8c;
+}
+
+/* 导航栏 */
+.split-pane-divider {
+    -fx-padding: 0 1 0 1;    /* 上下0像素，左右各1像素 */
+    /*-fx-background-color: #595959;*/
+    -fx-background-insets: 0;
+}
+.split-pane-divider:hover {
+    -fx-background-color: #3498db;
+    -fx-cursor: h-resize;
+}
+.nav-container {
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 15 0;
+    -fx-pref-width: 180px;
+}
+
+.nav-bar {
+    -fx-spacing: 10;
+    -fx-padding: 0 15;
+}
+
+/* 树视图扁平化样式 */
+.nav-tree-view, .tree-cell {
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 0;
+}
+
+/* 悬停效果 */
+.nav-tree-view:hover {
+    -fx-cursor: hand;
+}
+
+/* 选中效果 */
+.nav-tree-view .tree-cell:selected {
+    -fx-background-color: rgba(33, 150, 243, 0.3);
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-text-fill: #595959;
+    -fx-alignment: center-left;
+    -fx-padding: 8 15;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-cursor: hand;
+    -fx-max-width: infinity;
+}
+
+
+.nav-separator {
+    -fx-padding: 0 0;
+    -fx-min-width: 100%;
+}
+
+.storage-box {
+    -fx-padding: 15 10 0 10;
+}
+
+.storage-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: #595959;
+}
+
+.storage-info {
+    -fx-font-size: 12px;
+    -fx-text-fill: #8c8c8c;
+}
+
+/* 内容区 */
+.content-pane {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.03), 10, 0, 0, 0);
+}
+
+.file-list-view {
+    -fx-alignment: center;
+    -fx-spacing: 15;
+}
+
+.file-list-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #262626;
+}
+
+.file-list-hint {
+    -fx-font-size: 14px;
+    -fx-text-fill: #8c8c8c;
+}
+
+.nav-button-selected {
+    -fx-background-color: #f0f7ff !important;
+    -fx-text-fill: #1890ff !important;
+}
+
+/*滚动条样式*/
+.scroll-bar:vertical {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-pref-width: 7px;
+    -fx-pref-height: 5px;
+}
+/*
+
+!* 水平滚动条 *!
+.scroll-bar:horizontal {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-pref-height: 7px;
+    -fx-pref-width: 5px;
+}
+
+!*滚动条轨道*!
+.scroll-bar  .track {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+!* 滚动条两端的按钮 *!
+
+
+.scroll-bar {
+    -fx-background-radius: 8;
+    -fx-fit-to-height: true;
+    -fx-border-radius: 8;
+}
+
+.scroll-bar .content {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.scroll-bar .viewport {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+!*滚动条滑块*!
+.scroll-bar  .thumb {
+    -fx-background-color: #1296db;
+    -fx-background-radius: 7px;
+}
+*/
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-radius: 0;
+    -fx-padding: 0px;
+}
+.scroll-bar  .decrement-arrow, .scroll-bar .increment-arrow {
+    -fx-shape: " ";
+}
+.scroll-bar  .track {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}

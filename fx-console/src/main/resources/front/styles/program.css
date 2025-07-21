@@ -1,0 +1,31 @@
+.program-content-scroll {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-fit-to-height: true;
+    -fx-border-radius: 8;
+    -fx-padding: 10px 15px 10px 15px;
+}
+
+.program-content-scroll .content {
+    -fx-background-color: transparent;
+    -fx-text-alignment: center;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.program-content-scroll .viewport {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+/*滚动条滑块*/
+.program-content-scroll .scroll-bar  .thumb {
+    -fx-background-color: #1296db;
+    -fx-background-radius: 7px;
+}
+
+
+/* 滚动面板的角落区域 */
+.program-content-scroll .scroll-pane .corner {
+    -fx-background-color: transparent;
+}

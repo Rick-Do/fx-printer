@@ -1,0 +1,16 @@
+/* 全局样式 */
+
+.base-param-pane {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 0;
+    -fx-font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+.base-param-main-title {
+    -fx-font-family: "Microsoft YaHei UI", "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-fill: #333333;
+}

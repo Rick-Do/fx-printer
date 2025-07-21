@@ -1,0 +1,8 @@
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml">
+    <VBox alignment="CENTER">
+        <Label text="序列化配置,待开放..." styleClass="file-list-title"/>
+    </VBox>
+</StackPane>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.fxprinter.controller.BasicParamController"
+           styleClass="base-param-pane">
+    <!--<VBox spacing="10" >
+        <VBox spacing="5" style="-fx-padding: 10px 10px 10px 50px">
+            <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-padding: 10px 10px 10px 20px">
+                <Text style="-fx-fill: red;-fx-font-size: 18px" text="*"/>
+                <Text styleClass="rocketmq-main-title" text="Namesrv地址"/>
+            </HBox>
+            <VBox style="-fx-padding: 0 180px 0 15px">
+                <TextField fx:id="namesrv" promptText="服务地址，例如：localhost:9876" styleClass="rocketmq-search-field"  />
+            </VBox>
+        </VBox>
+    </VBox>-->
+    <VBox alignment="CENTER">
+        <Label text="基础信息配置，待开放..." styleClass="file-list-title"/>
+    </VBox>
+
+    <!-- 按钮区域 -->
+    <stylesheets>
+        <URL value="@../styles/basicParam.css"/>
+    </stylesheets>
+</StackPane>

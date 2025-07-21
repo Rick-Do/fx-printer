@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.shape.SVGPath?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            styleClass="setting-area"
+            fx:controller="com.fxprinter.controller.SettingController">
+    <center>
+        <ScrollPane styleClass="setting-content-scroll" fx:id="mainSettingScrollPane" fitToWidth="true" hbarPolicy="NEVER">
+            <BorderPane >
+                <top>
+                    <HBox fx:id="menu" styleClass="setting-nav-bar" spacing="10" alignment="CENTER_LEFT">
+                        <ToggleButton fx:id="basicParam" text="基础设置" styleClass="setting-toggle-button" selected="true"  />
+                        <ToggleButton fx:id="rocketMq" text="RocketMq参数" styleClass="setting-toggle-button"  />
+                        <ToggleButton fx:id="serialization" text="序列化配置" styleClass="setting-toggle-button"  />
+                    </HBox>
+                </top>
+                <center>
+                    <StackPane fx:id="contentPage">
+                    </StackPane>
+                </center>
+
+            </BorderPane>
+
+        </ScrollPane>
+    </center>
+
+
+    <HBox fx:id="buttonContainer" styleClass="setting-button-container" spacing="5">
+        <Button text="保存" fx:id="saveButton" styleClass="setting-button-save" />
+        <Button text="撤销更改" fx:id="cancelButton" styleClass="setting-button-cancel" />
+    </HBox>
+
+    <stylesheets>
+        <URL value="@../styles/setting.css"/>
+    </stylesheets>
+</BorderPane>
