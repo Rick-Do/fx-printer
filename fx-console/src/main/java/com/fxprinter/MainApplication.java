@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import lombok.Getter;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -17,7 +18,8 @@ import java.util.Objects;
 
 public class MainApplication extends Application {
 
-    private Stage primaryStage;
+    @Getter
+    private static  Stage primaryStage;
 
     private final String title = "FxPrinter";
 
@@ -30,7 +32,7 @@ public class MainApplication extends Application {
         Image image = new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("/front/icon.png")));
         stage.getIcons().add(image);
         stage.setScene(scene);
-        this.primaryStage = stage;
+        primaryStage = stage;
         setupSystemTray(); // 初始化系统托盘
         stage.setOnCloseRequest(event -> {
             Platform.setImplicitExit(false);
@@ -108,7 +110,6 @@ public class MainApplication extends Application {
 
     @Override
     public void stop() throws Exception {
-        System.out.println("调用了stop方法");
         ProgramController.stop();
         //最后再关闭连接
         DbUtil.closeDataSource();

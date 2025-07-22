@@ -29,3 +29,40 @@
 .program-content-scroll .scroll-pane .corner {
     -fx-background-color: transparent;
 }
+
+/* Material Design风格的ContextMenu */
+.material-context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 4;
+    -fx-padding: 8px 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.24), 8, 0, 0, 2);
+}
+
+/* 菜单项样式 */
+.material-context-menu .material-context-menu-item {
+    -fx-background-color: transparent;
+    -fx-padding: 8px 24px 8px 24px;
+    -fx-font-size: 14px;
+}
+
+/* 菜单项悬停效果 */
+.material-context-menu .material-context-menu-item:focused {
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 4;
+}
+
+.change-context-menu-item:focused {
+    -fx-background-color: transparent !important;
+    -fx-background-radius: 4;
+}
+
+.material-context-menu .material-context-menu-item:focused .label {
+    -fx-text-fill: #000000 !important;
+}
+
+
+/* 分隔线样式 */
+.material-context-menu .separator .line {
+    -fx-border-color: -divider-color;
+    -fx-border-width: 0 0 1 0;
+}

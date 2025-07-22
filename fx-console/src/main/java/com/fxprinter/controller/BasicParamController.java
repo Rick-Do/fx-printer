@@ -2,10 +2,10 @@ package com.fxprinter.controller;
 
 
 /**
- * 基础参数设置页面
+ *
  * @author dongyu
+ * @date 2025-07-21 17:03:39
  * @version 1.0
- * @date 2025-07-10 10:56:06
  * @since jdk1.8
  */
 public class BasicParamController {

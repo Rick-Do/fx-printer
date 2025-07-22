@@ -3,12 +3,17 @@ package com.fxprinter.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.fx.app.entity.ProgramServerInfo;
+import com.fxprinter.MainApplication;
 import com.fxprinter.service.ProgramServerInfoService;
 import com.fxprinter.util.PluginUtil;
+import com.fxprinter.util.SvgUtil;
+import com.fxprinter.view.CustomDialog;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import lombok.Getter;
 
@@ -25,7 +30,10 @@ import java.util.ResourceBundle;
  */
 public class ProgramController implements Initializable {
 
-    private static ContextMenu contextMenu;
+    //构建两个contextMenu
+    private static ContextMenu currentContextMenu;
+
+    //之前的contextMenu切换
 
     @FXML
     public FlowPane flowPane;
@@ -52,7 +60,72 @@ public class ProgramController implements Initializable {
             }
             cardList.add(controller);
         }
+        addContextMenu();
+
     }
+
+    private void addContextMenu() {
+        currentContextMenu = new ContextMenu();
+        //有多种方式
+        initContextMenu(currentContextMenu);
+        stackPaneContainer.setOnContextMenuRequested(event -> {
+            currentContextMenu.show(stackPaneContainer, event.getScreenX(), event.getScreenY());
+        });
+        stackPaneContainer.setOnMouseClicked(event -> {
+            //取消显示右键内容
+            currentContextMenu.hide();
+        });
+        /*currentContextMenu.setOnShown(e -> {
+            Skin<?> skin = currentContextMenu.getSkin();
+            if (skin instanceof ContextMenuSkin contextMenuSkin) {
+                Parent content = (Parent) contextMenuSkin.getNode();
+
+                // 给内容节点添加鼠标移出事件
+                content.addEventFilter(MouseEvent.MOUSE_EXITED, event -> {
+                    //鼠标移出事件
+                    Platform.runLater(()->{
+                    });
+                });
+            }
+        });*/
+    }
+
+    private void initContextMenu(ContextMenu contextMenu) {
+        currentContextMenu.getStyleClass().add("material-context-menu");
+        contextMenu.getItems().add(createMenuItem("RocketMQ", "RocketMQ", this::openRocketMQ));
+        contextMenu.getItems().add(createMenuItem("SpringBoot", "springboot", this::openSpringBoot));
+        contextMenu.getItems().add(createMenuItem("WebSocket", "webSocket", this::openWebSocket));
+        contextMenu.getItems().add(createMenuItem("RabbitMQ", "rabbitMQ", this::openRabbitMQ));
+    }
+
+    private MenuItem createMenuItem(String text, String icon, EventHandler<ActionEvent> eventHandler) {
+        MenuItem menuItem = new MenuItem(text);
+        menuItem.getStyleClass().add("material-context-menu-item");
+        menuItem.setGraphic(SvgUtil.loadSvg(icon, ""));
+        menuItem.addEventFilter(MouseEvent.MOUSE_EXITED, event -> {
+            System.out.println("移出");
+        });
+        menuItem.setOnAction(eventHandler);
+        return menuItem;
+    }
+
+    private void openRocketMQ(ActionEvent event) {
+        CustomDialog rocketMq = new CustomDialog(PluginUtil.loadComponentPlugin("rocketMq"), "新增RocketMQ");
+        rocketMq.show(MainApplication.getPrimaryStage());
+    }
+
+    private void openSpringBoot(ActionEvent event) {
+        System.out.println("打开SpringBoot");
+    }
+
+    private void openWebSocket(ActionEvent event) {
+        System.out.println("打开WebSocket");
+    }
+
+    private void openRabbitMQ(ActionEvent event) {
+        System.out.println("打开RabbitMQ");
+    }
+
 
     public static void stop() {
         System.out.println("停止");

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Label?>
-<StackPane xmlns:fx="http://javafx.com/fxml"
+<StackPane xmlns:fx="http://javafx.com/fxml/17"
            fx:controller="com.fxprinter.controller.BasicParamController"
            styleClass="base-param-pane">
     <!--<VBox spacing="10" >

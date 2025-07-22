@@ -43,6 +43,10 @@ public class SvgUtil {
         return loadSvg(name, 3.5D, 3.5D);
     }
 
+    public static Node loadSvg(String name, String color) {
+        return loadSvg(name, 3.5D, 3.5D, color);
+    }
+
     public static Node loadSvg(String name, double width, double height) {
         return loadSvg(name, width, height, "#1296db");
     }
