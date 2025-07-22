@@ -2,9 +2,11 @@ package com.fxprinter.controller;
 
 
 import com.fx.app.entity.ProgramServerInfo;
+import com.fx.app.entity.RocketMqConfig;
 import com.fx.app.enums.ProgramRunStatus;
 import com.fxprinter.service.ProgramServerInfoService;
 import com.fxprinter.service.RocketMQConsumerService;
+import com.fxprinter.service.RocketMqConfigService;
 import com.fxprinter.util.SvgUtil;
 import com.printer.base.enums.ProgramType;
 import javafx.application.Platform;
@@ -82,9 +84,11 @@ public class ProgramCardController implements Initializable {
         //中间图片
         centerPane.getChildren().add(SvgUtil.loadSvg("rocketmq_1", 50, 50, ""));
         topPane.getChildren().add(createTopNode());
+
+        RocketMqConfig config = RocketMqConfigService.getConfigById(serverInfo.getId());
         //底部容器
         bottomPane.getChildren().add(createBottomNode(
-                        ()-> consumerService.start("printer"),
+                        ()-> consumerService.start(config),
                         ()-> consumerService.stopConsumer())
                 );
     }

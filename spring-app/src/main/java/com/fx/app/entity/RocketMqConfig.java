@@ -29,7 +29,7 @@ public class RocketMqConfig {
     private String consumer;
 
     @TableField("PROGRAM_ID")
-    private String programId;
+    private Integer programId;
 
     @TableField("TOPIC")
     private String topic;

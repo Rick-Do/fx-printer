@@ -6,8 +6,26 @@
 <?import javafx.scene.control.Button?>
 <StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.fxprinter.controller.RocketMqController"
-           style="-fx-border-width: 0 0 0 0; -fx-padding: 0 0 60px 0">
+           style="-fx-border-width: 0 0 0 0; -fx-padding: 0 0 10 0">
     <VBox spacing="10" >
+        <VBox spacing="5" style="-fx-padding: 10px 10px 10px 50px">
+            <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-padding: 10px 10px 10px 20px">
+                <Text style="-fx-fill: red;-fx-font-size: 18px"  text="*"/>
+                <Text styleClass="rocketmq-main-title" text="程序名称"/>
+            </HBox>
+            <VBox style="-fx-padding: 0 180px 0 15px">
+                <TextField fx:id="programName" promptText="to show program name" styleClass="rocketmq-search-field"  />
+            </VBox>
+        </VBox>
+        <VBox spacing="5" style="-fx-padding: 10px 10px 10px 50px">
+            <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-padding: 10px 10px 10px 20px">
+                <Text style="-fx-fill: red;-fx-font-size: 18px"  text="*"/>
+                <Text styleClass="rocketmq-main-title" text="程序描述"/>
+            </HBox>
+            <VBox style="-fx-padding: 0 180px 0 15px">
+                <TextField fx:id="programDescribe" promptText="The describe of program" styleClass="rocketmq-search-field"  />
+            </VBox>
+        </VBox>
         <VBox spacing="5" style="-fx-padding: 10px 10px 10px 50px">
             <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-padding: 10px 10px 10px 20px">
                 <Text style="-fx-fill: red;-fx-font-size: 18px"  text="*"/>
@@ -65,6 +83,8 @@
             </VBox>
         </VBox>
 
+
+
         <!--<VBox spacing="5" style="-fx-padding: 10px 10px 10px 50px">
             <HBox alignment="CENTER_LEFT" spacing="6" style="-fx-padding: 10px 10px 10px 34px">
                 <Text styleClass="rocketmq-main-title" text="消息模式"/>
@@ -74,6 +94,11 @@
             </VBox>
         </VBox>-->
     </VBox>
+
+<!--    <HBox fx:id="buttonContainer" styleClass="rocketmq-button-container" spacing="5">
+        <Button text="保存"  styleClass="rocketmq-button-save" onMouseClicked="#handleSave" />
+        <Button text="撤销更改"  styleClass="rocketmq-button-cancel" onMouseClicked="#handleCancel" />
+    </HBox>-->
 
 
     <stylesheets>

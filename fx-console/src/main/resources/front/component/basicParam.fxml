@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
-<?import java.net.URL?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Label?>
-<StackPane xmlns:fx="http://javafx.com/fxml/17"
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.fxprinter.controller.BasicParamController"
            styleClass="base-param-pane">
     <!--<VBox spacing="10" >

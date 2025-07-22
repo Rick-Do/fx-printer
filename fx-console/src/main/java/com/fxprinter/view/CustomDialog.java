@@ -3,7 +3,9 @@ package com.fxprinter.view;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -28,6 +30,10 @@ public class CustomDialog extends StackPane {
     private final BorderPane dialogLayout = new BorderPane();
     private final Pane backgroundLayer = new Pane();
     private Node centerContent;
+
+    @Getter
+    @Setter
+    private EventHandler<ActionEvent> submitHandler;
 
     @Getter
     @Setter
@@ -75,10 +81,30 @@ public class CustomDialog extends StackPane {
 
         // 4. 创建滚动容器（包裹整个dialogLayout）
         createScrollContainer();
-
+        createButton();
         // 5. 构建布局
         getChildren().addAll(backgroundLayer, dialogScrollPane);
         getStyleClass().add("CustomDialog-root");
+    }
+
+    private void createButton() {
+        Button closeButton = new Button("取消");
+        closeButton.getStyleClass().add("button-cancel");
+        closeButton.setOnAction(e -> close());
+        Button saveButton = new Button("提交");
+        saveButton.getStyleClass().add("button-save");
+        saveButton.setOnAction(e->{
+            if (submitHandler != null) {
+                submitHandler.handle( e);
+            }
+            close();
+        });
+        HBox buttonBox = new HBox();
+        buttonBox.setSpacing(5);
+        buttonBox.setAlignment(Pos.CENTER_RIGHT);
+        buttonBox.getStyleClass().add("button-box");
+        buttonBox.getChildren().addAll(closeButton, saveButton);
+        dialogLayout.setBottom(buttonBox);
     }
 
     private void createTopRegion() {
@@ -150,6 +176,7 @@ public class CustomDialog extends StackPane {
     }
 
     public void setBottomContent(Node bottomNode) {
+        removeBottomContent();
         this.bottomContent = bottomNode;
         bottomContent.getStyleClass().add("CustomDialog-bottom");
         dialogLayout.setBottom(bottomContent);

@@ -11,12 +11,15 @@ import com.fxprinter.view.CustomDialog;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import lombok.Getter;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +33,7 @@ import java.util.ResourceBundle;
  */
 public class ProgramController implements Initializable {
 
-    //构建两个contextMenu
     private static ContextMenu currentContextMenu;
-
-    //之前的contextMenu切换
 
     @FXML
     public FlowPane flowPane;
@@ -110,8 +110,16 @@ public class ProgramController implements Initializable {
     }
 
     private void openRocketMQ(ActionEvent event) {
-        CustomDialog rocketMq = new CustomDialog(PluginUtil.loadComponentPlugin("rocketMq"), "新增RocketMQ");
-        rocketMq.show(MainApplication.getPrimaryStage());
+        try {
+            FXMLLoader loader = PluginUtil.loadComponentLoader("rocketMq");
+            Node node = loader.load();
+            RocketMqController controller = loader.getController();
+            CustomDialog rocketMq = new CustomDialog(node, "新增RocketMQ");
+            rocketMq.setSubmitHandler(controller::handleSave);
+            rocketMq.show(MainApplication.getPrimaryStage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void openSpringBoot(ActionEvent event) {

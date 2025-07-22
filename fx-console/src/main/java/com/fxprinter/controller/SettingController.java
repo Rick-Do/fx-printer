@@ -39,8 +39,6 @@ public class SettingController implements Initializable {
     @FXML
     public ToggleButton basicParam;
 
-    @FXML
-    public ToggleButton rocketMq;
 
     @FXML
     public HBox menu;
@@ -100,7 +98,6 @@ public class SettingController implements Initializable {
 
 
         //初始化图标
-        rocketMq.setGraphic(SvgUtil.loadSvg("RocketMQ"));
         basicParam.setGraphic(SvgUtil.loadSvg("base"));
         serialization.setGraphic(SvgUtil.loadSvg("serialization"));
         menuGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
@@ -118,7 +115,7 @@ public class SettingController implements Initializable {
             }
         });
         //初始化内容数据
-        Toggle toggle = menuGroup.getToggles().get(1);
+        Toggle toggle = menuGroup.getToggles().get(0);
         menuGroup.selectToggle(toggle);
         loadContentView(((ToggleButton) toggle).getId() + ".fxml", 200);
     }

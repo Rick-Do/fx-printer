@@ -32,7 +32,7 @@ public class PluginUtil {
         try {
             return loader.load();
         } catch (Exception e) {
-            System.out.println("插件加载失败,失败原因：" + e.getMessage());
+            System.out.println("插件加载失败,失败原因：" + e.getCause());
         }
         return null;
     }
@@ -50,7 +50,7 @@ public class PluginUtil {
             loader.load();
             return loader.getController();
         } catch (Exception e) {
-            System.out.println("插件加载失败,失败原因：" + e.getMessage());
+            System.out.println("插件加载失败,失败原因：" + e.getCause());
         }
         return null;
     }
@@ -68,22 +68,12 @@ public class PluginUtil {
         return loadPlugin(fxlPath);
     }
 
-    public static ImageView loadImageView(String assetName) {
-        ImageView imageView = new ImageView();
-        imageView.setImage(new Image(Objects.requireNonNull(PluginUtil.class.getResourceAsStream("/front/assets/" + assetName))));
-        return imageView;
-    }
-
-    public static ImageView loadImageView(String assetName, double width, double height) {
-        ImageView imageView = loadImageView(assetName);
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-        return imageView;
-    }
-
-    public static Node loadSVG(String assetName) {
-        SVGPath svgPath = new SVGPath();
-        return svgPath;
+    public static FXMLLoader loadComponentLoader(String fxmlPath) {
+        fxmlPath = "/front/component/" + fxmlPath;
+        if (!StrUtil.endWith(fxmlPath, ".fxml")) {
+            fxmlPath += ".fxml";
+        }
+        return new FXMLLoader(PluginUtil.class.getResource(fxmlPath));
     }
 
 }

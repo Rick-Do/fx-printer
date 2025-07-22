@@ -41,12 +41,10 @@ public class RocketMQConsumerService {
 
     /**
      * 绘制图片并打印
-     * @param imgPath 图片路径
      */
-    public void start(String imgPath) {
+    public void start(RocketMqConfig rocketMqConfig) {
         //获取rocketmq配置
         try {
-            RocketMqConfig rocketMqConfig = RocketMqConfigService.getConfigById(1);
             if (rocketMqConfig == null) {
                 throw new RuntimeException("请先配置RocketMq");
             }
@@ -77,7 +75,7 @@ public class RocketMQConsumerService {
                     String message = new String(msg.getBody(), StandardCharsets.UTF_8);
                     PrintDataDTO dataDTO = JSON.parseObject(message, PrintDataDTO.class);
                     try {
-                        PrintUtil.docPrintPaint(dataDTO, imgPath);
+                        PrintUtil.docPrintPaint(dataDTO, "printerImg");
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

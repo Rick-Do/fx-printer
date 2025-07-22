@@ -210,3 +210,49 @@
     -fx-font-weight: 800;
     -fx-text-fill: #1296db;
 }
+
+
+/* 保存按钮 */
+.button-save {
+    -fx-background-color: #1976d2;
+    -fx-min-width: 74px;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+    -fx-background-radius: 7px;
+    -fx-padding: 10px 15px;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+
+/* 撤销按钮 */
+.button-cancel {
+    /*-fx-background-color: #f1f1f1;*/
+    -fx-background-color: #e0e0e0;
+    -fx-min-width: 74px;
+    -fx-font-size: 14px;
+    -fx-text-alignment: center;
+    -fx-background-radius: 7px;
+    -fx-padding: 10px 15px;
+    -fx-text-fill: black;
+    -fx-cursor: hand;
+}
+
+.button-save:hover {
+    -fx-background-color: #1565c0;
+}
+
+.button-cancel:hover {
+    /*-fx-background-color: #e0e0e0;*/
+    -fx-background-color: gray;
+}
+
+.button-box {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    /*-fx-border-width: 2px 2px 2px 2px;*/
+    /*-fx-border-color: #e0e0e0;*/
+    -fx-border-radius: 8;
+    -fx-min-height: 50px;
+    -fx-padding: 10px 20px 10px 20px;
+}

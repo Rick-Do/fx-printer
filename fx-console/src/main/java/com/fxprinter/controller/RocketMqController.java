@@ -1,7 +1,6 @@
 package com.fxprinter.controller;
 
 
-import cn.hutool.core.util.StrUtil;
 import com.fx.app.entity.ProgramServerInfo;
 import com.fx.app.entity.RocketMqConfig;
 import com.fx.app.enums.ProgramRunStatus;
@@ -9,12 +8,12 @@ import com.fx.app.enums.ProgramStatus;
 import com.fxprinter.model.RocketMqMessageModel;
 import com.fxprinter.service.ProgramServerInfoService;
 import com.fxprinter.service.RocketMqConfigService;
-import com.fxprinter.state.SettingButtonState;
 import com.fxprinter.util.FadeTransitionUtil;
 import com.fxprinter.util.PromiseUtil;
 import com.fxprinter.util.SvgUtil;
 import com.printer.base.enums.ProgramType;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -62,6 +61,13 @@ public class RocketMqController implements Initializable {
     @FXML
     public TextField consumerGroup;
 
+    @FXML
+    public TextField programName;
+
+    @FXML
+    public TextField programDescribe;
+
+
     private Button clearButton;
 
 
@@ -69,11 +75,11 @@ public class RocketMqController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (messageModel != null) {
+        /*if (messageModel != null) {
             initMessageModePane();
-        }
-        initConfigInfo();
-        initListener();
+        }*/
+//        initConfigInfo();
+//        initListener();
     }
 
     private void initConfigInfo() {
@@ -91,14 +97,14 @@ public class RocketMqController implements Initializable {
             accessKeySecret.setText(mqConfig.getAccessKeySecret());
             return null;
         });
-        SettingButtonState.getInstance().saveButtonProperty().setOnMouseClicked(this::handleSave);
-        SettingButtonState.getInstance().cancelButtonProperty().setOnMouseClicked(this::handleCancel);
         supplyAsync.join();
     }
 
-    private void initListener() {
+    /*private void initListener() {
         if (namesrv != null) {
-            namesrvListener();
+           namesrv.textProperty().addListener((observable, oldValue, newValue) -> {
+            SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
+        });
         }
         if (topic != null) {
             topic.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -131,7 +137,7 @@ public class RocketMqController implements Initializable {
             });
         }
 
-    }
+    }*/
 
     private void initMessageModePane() {
         clearButton = new Button();
@@ -201,17 +207,11 @@ public class RocketMqController implements Initializable {
     }
 
 
-    private void namesrvListener() {
-        namesrv.textProperty().addListener((observable, oldValue, newValue) -> {
-            SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
-        });
-    }
-
     /**
      * 属性是否发送变化
      * @return  true-是,false-否
      */
-    private boolean isAttitudeChange() {
+    /*private boolean isAttitudeChange() {
         if (!Objects.equals(namesrv.getText(), config.getNamesrv())) {
             return true;
         }
@@ -231,9 +231,9 @@ public class RocketMqController implements Initializable {
             return true;
         }
         return false;
-    }
+    }*/
 
-    private void handleSave(MouseEvent  event) {
+    public void handleSave(ActionEvent event)  {
         boolean isSave = Objects.isNull(config.getId());
         config.setNamesrv(namesrv.getText());
         config.setNamesrv(namesrv.getText());
@@ -243,7 +243,6 @@ public class RocketMqController implements Initializable {
         config.setAccessKeyId(accessKeyId.getText());
         config.setAccessKeySecret(accessKeySecret.getText());
         if (isSave){
-            config.setId(1);
             //新增数据
             PromiseUtil.runInBackground(()-> {
                 //新增服务
@@ -253,24 +252,19 @@ public class RocketMqController implements Initializable {
                         //初始为空闲状态
                         .setRunStatus(ProgramRunStatus.IDLE.getValue())
                         .setCreateTime(new Date())
-                        .setProgramName("MQ测试")
-                        .setDescription("这是一个RocketMQ服务，根据消费者进行消费");
+                        .setProgramName(programName.getText())
+                        .setDescription(programDescribe.getText());
                 ProgramServerInfoService.insert(serverInfo);
+                config.setProgramId(serverInfo.getId());
                 int insert = RocketMqConfigService.insert(config);
-                if (insert > 0) {
-                    SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
-                }
+
             });
             return;
         }
-        PromiseUtil.runInBackground(()->RocketMqConfigService.update(config), count -> {
-            if (count > 0) {
-                SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
-            }
-        });
+        PromiseUtil.runInBackground(()->RocketMqConfigService.update(config));
     }
 
-    private void handleCancel(MouseEvent event) {
+   /* public void handleCancel(ActionEvent event) {
         RocketMqConfigService.getConfigById(1, rocketMqConfig -> {
             if (rocketMqConfig == null) {
                 return;
@@ -281,9 +275,8 @@ public class RocketMqController implements Initializable {
             consumerGroup.setText(rocketMqConfig.getConsumer());
             accessKeyId.setText(rocketMqConfig.getAccessKeyId());
             accessKeySecret.setText(rocketMqConfig.getAccessKeySecret());
-            SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
         }, throwable -> {});
-    }
+    }*/
 
 
 }

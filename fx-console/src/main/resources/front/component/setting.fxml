@@ -13,7 +13,7 @@
                 <top>
                     <HBox fx:id="menu" styleClass="setting-nav-bar" spacing="10" alignment="CENTER_LEFT">
                         <ToggleButton fx:id="basicParam" text="基础设置" styleClass="setting-toggle-button" selected="true"  />
-                        <ToggleButton fx:id="rocketMq" text="RocketMq参数" styleClass="setting-toggle-button"  />
+<!--                        <ToggleButton fx:id="rocketMq" text="RocketMq参数" styleClass="setting-toggle-button"  />-->
                         <ToggleButton fx:id="serialization" text="序列化配置" styleClass="setting-toggle-button"  />
                     </HBox>
                 </top>

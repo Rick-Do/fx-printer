@@ -49,9 +49,7 @@ public class NavController implements Initializable {
             }
         });
         TreeItem<Label> finalFirst = first;
-        Platform.runLater(()->{
-            navTree.getSelectionModel().select(finalFirst);
-        });
+        Platform.runLater(()-> navTree.getSelectionModel().select(finalFirst));
     }
 
     private void initNavMap() {
