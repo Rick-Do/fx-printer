@@ -4,10 +4,13 @@ package com.fxprinter.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.fx.app.entity.ProgramServerInfo;
 import com.fxprinter.MainApplication;
+import com.fxprinter.event.ProgramRefreshEvent;
 import com.fxprinter.service.ProgramServerInfoService;
 import com.fxprinter.util.PluginUtil;
 import com.fxprinter.util.SvgUtil;
 import com.fxprinter.view.CustomDialog;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -47,13 +50,22 @@ public class ProgramController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //获取配置
+        initCard();
+
+
+    }
+
+    private void initCard() {
         List<ProgramServerInfo> serverInfos = ProgramServerInfoService.list(new LambdaQueryWrapper<>());
         if (serverInfos == null) {
             return;
         }
         for (ProgramServerInfo serverInfo : serverInfos) {
+            EventBus eventBus = new EventBus();
+            eventBus.register(this);
             ProgramCardController controller = loadCardView();
             if (controller != null) {
+                controller.setEventBus(eventBus);
                 controller.setServerInfo(serverInfo);
                 controller.init();
                 flowPane.getChildren().add(controller.getRoot());
@@ -61,7 +73,6 @@ public class ProgramController implements Initializable {
             cardList.add(controller);
         }
         addContextMenu();
-
     }
 
     private void addContextMenu() {
@@ -90,6 +101,14 @@ public class ProgramController implements Initializable {
         });*/
     }
 
+    @Subscribe
+    public void handleRefresh(ProgramRefreshEvent event) {
+        //刷新
+        flowPane.getChildren().clear();
+        cardList.clear();
+        initCard();
+    }
+
     private void initContextMenu(ContextMenu contextMenu) {
         currentContextMenu.getStyleClass().add("material-context-menu");
         contextMenu.getItems().add(createMenuItem("RocketMQ", "RocketMQ", this::openRocketMQ));
@@ -115,7 +134,10 @@ public class ProgramController implements Initializable {
             Node node = loader.load();
             RocketMqController controller = loader.getController();
             CustomDialog rocketMq = new CustomDialog(node, "新增RocketMQ");
-            rocketMq.setSubmitHandler(controller::handleSave);
+            rocketMq.setSubmitHandler(e->{
+                controller.handleSave(e);
+                handleRefresh(new ProgramRefreshEvent());
+            });
             rocketMq.show(MainApplication.getPrimaryStage());
         } catch (Exception e) {
             throw new RuntimeException(e);

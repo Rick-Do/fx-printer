@@ -1,6 +1,7 @@
 package com.fxprinter.service;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.fx.app.entity.RocketMqConfig;
 import com.fx.app.mapper.RocketMqConfigMapper;
 import com.fxprinter.util.DbUtil;
@@ -22,6 +23,20 @@ public class RocketMqConfigService {
         try (SqlSession session = DbUtil.openSession()) {
             RocketMqConfigMapper mapper = session.getMapper(RocketMqConfigMapper.class);
             RocketMqConfig result = mapper.selectById(id);
+            session.commit();
+            return result;
+        }catch (Exception e) {
+            System.out.println("ERROR:" + e.getMessage());
+        }
+        return null;
+    }
+
+    public static RocketMqConfig getConfigByProgramId(Integer programId) {
+        try (SqlSession session = DbUtil.openSession()) {
+            RocketMqConfigMapper mapper = session.getMapper(RocketMqConfigMapper.class);
+            RocketMqConfig result = mapper.selectOne(new LambdaQueryWrapper<RocketMqConfig>()
+                    .eq(RocketMqConfig::getProgramId, programId)
+            );
             session.commit();
             return result;
         }catch (Exception e) {

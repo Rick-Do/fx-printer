@@ -22,6 +22,7 @@ module com.fxprinter {
     requires spring.jdbc;
     requires org.checkerframework.checker.qual;
     requires java.desktop;
+    requires com.google.common;
 
 
     opens com.fxprinter to javafx.fxml;
@@ -29,6 +30,7 @@ module com.fxprinter {
     opens com.fxprinter.view to javafx.fxml;
     exports com.fxprinter;
     exports com.fxprinter.model;
+    exports com.fxprinter.event;
     exports com.fxprinter.controller;
     exports com.fxprinter.view;
 }

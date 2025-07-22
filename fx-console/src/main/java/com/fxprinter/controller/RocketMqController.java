@@ -12,6 +12,7 @@ import com.fxprinter.util.FadeTransitionUtil;
 import com.fxprinter.util.PromiseUtil;
 import com.fxprinter.util.SvgUtil;
 import com.printer.base.enums.ProgramType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -82,11 +83,17 @@ public class RocketMqController implements Initializable {
 //        initListener();
     }
 
-    private void initConfigInfo() {
-        CompletableFuture<Object> supplyAsync = CompletableFuture.supplyAsync(() -> {
-            RocketMqConfig mqConfig = RocketMqConfigService.getConfigById(1);
+    public void initConfigInfo(Integer programId) {
+        PromiseUtil.runInBackground(()->{
+            ProgramServerInfo programServerInfo = ProgramServerInfoService.getById(programId);
+            if (programServerInfo == null) {
+                return;
+            }
+            programName.setText(programServerInfo.getProgramName());
+            programDescribe.setText(programServerInfo.getDescription());
+            RocketMqConfig mqConfig = RocketMqConfigService.getConfigByProgramId(programId);
             if (mqConfig == null) {
-                return null;
+                return;
             }
             config = mqConfig;
             namesrv.setText(mqConfig.getNamesrv());
@@ -95,9 +102,8 @@ public class RocketMqController implements Initializable {
             tag.setText(mqConfig.getTag());
             accessKeyId.setText(mqConfig.getAccessKeyId());
             accessKeySecret.setText(mqConfig.getAccessKeySecret());
-            return null;
         });
-        supplyAsync.join();
+
     }
 
     /*private void initListener() {
@@ -244,24 +250,29 @@ public class RocketMqController implements Initializable {
         config.setAccessKeySecret(accessKeySecret.getText());
         if (isSave){
             //新增数据
-            PromiseUtil.runInBackground(()-> {
-                //新增服务
-                ProgramServerInfo serverInfo = new ProgramServerInfo()
-                        .setType(ProgramType.RocketMQ)
-                        .setStatus(ProgramStatus.ENABLE.getValue())
-                        //初始为空闲状态
-                        .setRunStatus(ProgramRunStatus.IDLE.getValue())
-                        .setCreateTime(new Date())
-                        .setProgramName(programName.getText())
-                        .setDescription(programDescribe.getText());
-                ProgramServerInfoService.insert(serverInfo);
-                config.setProgramId(serverInfo.getId());
-                int insert = RocketMqConfigService.insert(config);
-
-            });
+            ProgramServerInfo serverInfo = new ProgramServerInfo()
+                    .setType(ProgramType.RocketMQ)
+                    .setStatus(ProgramStatus.ENABLE.getValue())
+                    //初始为空闲状态
+                    .setRunStatus(ProgramRunStatus.IDLE.getValue())
+                    .setCreateTime(new Date())
+                    .setProgramName(programName.getText())
+                    .setDescription(programDescribe.getText());
+            ProgramServerInfoService.insert(serverInfo);
+            config.setProgramId(serverInfo.getId());
+             RocketMqConfigService.insert(config);
             return;
         }
-        PromiseUtil.runInBackground(()->RocketMqConfigService.update(config));
+        PromiseUtil.runInBackground(()->{
+            RocketMqConfigService.update(config);
+            ProgramServerInfo serverInfo = ProgramServerInfoService.getById(config.getProgramId());
+            if (serverInfo == null) {
+                return;
+            }
+            serverInfo.setProgramName(programName.getText());
+            serverInfo.setDescription(programDescribe.getText());
+            ProgramServerInfoService.updateById(serverInfo);
+        });
     }
 
    /* public void handleCancel(ActionEvent event) {

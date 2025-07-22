@@ -31,3 +31,10 @@
     -fx-border-width: 0;
     -fx-cursor: hand;
 }
+
+.program-top-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}

@@ -4,22 +4,31 @@ package com.fxprinter.controller;
 import com.fx.app.entity.ProgramServerInfo;
 import com.fx.app.entity.RocketMqConfig;
 import com.fx.app.enums.ProgramRunStatus;
+import com.fxprinter.MainApplication;
+import com.fxprinter.event.ProgramRefreshEvent;
 import com.fxprinter.service.ProgramServerInfoService;
 import com.fxprinter.service.RocketMQConsumerService;
 import com.fxprinter.service.RocketMqConfigService;
+import com.fxprinter.util.PluginUtil;
 import com.fxprinter.util.SvgUtil;
+import com.fxprinter.view.CustomDialog;
+import com.google.common.eventbus.EventBus;
 import com.printer.base.enums.ProgramType;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.control.skin.ContextMenuSkin;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import lombok.Data;
+import lombok.Setter;
 
 import java.net.URL;
 import java.util.Objects;
@@ -42,6 +51,9 @@ public class ProgramCardController implements Initializable {
 
     @FXML
     public StackPane centerPane;
+
+    @Setter
+    private EventBus eventBus;
 
     @FXML
     public StackPane bottomPane;
@@ -177,13 +189,58 @@ public class ProgramCardController implements Initializable {
     private Node createTopNode() {
         String programName = serverInfo.getProgramName();
         HBox hBox = new HBox();
-
         //标题
         Label label = new Label(programName);
         label.getStyleClass().add("program-title");
         hBox.getChildren().add(label);
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        hBox.getChildren().add(spacer);
+        hBox.getChildren().add(createTopRightNode());
         return hBox;
     }
+
+    private Node createTopRightNode() {
+        Button button = new Button();
+        button.setGraphic(SvgUtil.loadSvg("setting"));
+        button.getStyleClass().add("program-top-button");
+        ContextMenu contextMenu = new ContextMenu();
+        contextMenu.getStyleClass().add("top-setting-context-menu");
+        MenuItem edit = new MenuItem("修改");
+        edit.setOnAction(this::handleEdit);
+        contextMenu.getStyleClass().add("top-setting-item");
+        MenuItem delete = new MenuItem("删除");
+        delete.setOnAction(this::handleDelete);
+        contextMenu.getStyleClass().add("top-setting-item");
+        contextMenu.getItems().addAll(edit, delete);
+        button.setOnMouseClicked(event -> contextMenu.show(button, event.getScreenX(), event.getScreenY()));
+        return button;
+    }
+
+    private void handleDelete(ActionEvent event) {
+        ProgramServerInfoService.deleteById(serverInfo.getId());
+        eventBus.post(new ProgramRefreshEvent());
+    }
+
+    private void handleEdit(ActionEvent event) {
+        try {
+            switch (serverInfo.getType()) {
+                case RocketMQ -> {
+                    FXMLLoader loader = PluginUtil.loadComponentLoader("rocketMq");
+                    Node node = loader.load();
+                    RocketMqController controller = loader.getController();
+                    controller.initConfigInfo(serverInfo.getId());
+                    CustomDialog dialog = new CustomDialog(node, "修改RabbitMQ");
+                    dialog.setSubmitHandler(controller::handleSave);
+                    dialog.show(MainApplication.getPrimaryStage());
+                }
+            }
+            eventBus.post(new ProgramRefreshEvent());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private void handleStartButtonClick(Runnable runningTask) {
         if (loading) {
