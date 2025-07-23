@@ -14,3 +14,136 @@
     -fx-font-weight: bold;
     -fx-fill: #333333;
 }
+
+/* 基础样式 */
+.baseParam-section {
+    -fx-padding: 15px;
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+}
+
+.baseParam-section-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.baseParam-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.baseParam-description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #666666;
+}
+
+/* 控件样式 */
+.baseParam-combobox {
+    -fx-pref-width: 300px;
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 4px;
+    -fx-padding: 5px;
+}
+
+.baseParam-radio {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.baseParam-color-btn {
+    -fx-background-radius: 4px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+    -fx-cursor: hand;
+}
+
+.baseParam-checkbox {
+    -fx-font-size: 14px;
+}
+
+.baseParam-textfield {
+    -fx-pref-width: 400px;
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 4px;
+    -fx-padding: 5px;
+}
+
+.baseParam-spinner {
+    -fx-pref-width: 80px;
+}
+
+/* 按钮样式 */
+.baseParam-btn {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 20px;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+}
+
+.baseParam-cancel-btn {
+    -fx-background-color: #f8f9fa;
+    -fx-text-fill: #333333;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+}
+
+.baseParam-save-btn {
+    -fx-background-color: #4285f4;
+    -fx-text-fill: white;
+}
+
+/* 深色模式样式 */
+.dark-mode .baseParam-section {
+    -fx-background-color: #2d2d2d;
+    -fx-border-color: #444444;
+}
+
+.dark-mode .baseParam-section-title,
+.dark-mode .baseParam-subtitle {
+    -fx-text-fill: #e0e0e0;
+}
+
+.dark-mode .baseParam-description {
+    -fx-text-fill: #aaaaaa;
+}
+
+.dark-mode .baseParam-combobox,
+.dark-mode .baseParam-textfield {
+    -fx-background-color: #3a3a3a;
+    -fx-border-color: #555555;
+    -fx-text-fill: white;
+}
+
+.dark-mode .baseParam-radio {
+    -fx-text-fill: #e0e0e0;
+}
+
+.dark-mode .baseParam-color-btn {
+    -fx-border-color: #555555;
+}
+
+.dark-mode .baseParam-cancel-btn {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #e0e0e0;
+    -fx-border-color: #555555;
+}
+
+/* 新增禁用项样式 */
+.baseParam-disabled-item {
+    -fx-text-fill: #aaaaaa;
+    -fx-opacity: 0.7;
+}
+
+/* 适配深色模式 */
+.dark-mode .baseParam-disabled-item {
+    -fx-text-fill: #777777;
+}

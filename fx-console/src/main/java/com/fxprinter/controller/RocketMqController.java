@@ -77,11 +77,6 @@ public class RocketMqController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         config = new RocketMqConfig();
-        /*if (messageModel != null) {
-            initMessageModePane();
-        }*/
-//        initConfigInfo();
-//        initListener();
     }
 
     public void initConfigInfo(Integer programId) {
