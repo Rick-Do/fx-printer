@@ -9,15 +9,11 @@ import com.fx.app.entity.ProgramServerInfo;
 import com.fx.app.entity.RocketMqConfig;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import javafx.application.Platform;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.File;
-import java.nio.file.Paths;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * @author dongyu

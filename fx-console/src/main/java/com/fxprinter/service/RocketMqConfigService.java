@@ -1,6 +1,7 @@
 package com.fxprinter.service;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.fx.app.entity.RocketMqConfig;
 import com.fx.app.mapper.RocketMqConfigMapper;
@@ -44,17 +45,6 @@ public class RocketMqConfigService {
         }
         return null;
     }
-
-    /**
-     * 根据配置id查询配置信息
-     * @param id id
-     * @param onSuccess 执行成功之后的方法
-     * @param onError 执行失败之后方法
-     */
-    public static void getConfigById(Integer id, Consumer<RocketMqConfig> onSuccess, Consumer<Throwable> onError) {
-        PromiseUtil.runInBackground(() -> getConfigById(id), onSuccess, onError);
-    }
-
     /**
      * 新增数据
      */
@@ -79,13 +69,10 @@ public class RocketMqConfigService {
         }
     }
 
-    /**
-     * 删除数据
-     */
-    public static int delete(RocketMqConfig entity) {
+    public static int delete(Wrapper<RocketMqConfig> wrapper) {
         try (SqlSession session = DbUtil.openSession()) {
             RocketMqConfigMapper mapper = session.getMapper(RocketMqConfigMapper.class);
-            int result = mapper.deleteById(entity);
+            int result = mapper.delete(wrapper);
             session.commit();
             return result;
         }

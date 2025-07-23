@@ -1,6 +1,8 @@
 package com.fxprinter.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fx.app.entity.ProgramServerInfo;
 import com.fx.app.entity.RocketMqConfig;
 import com.fx.app.enums.ProgramRunStatus;
@@ -219,6 +221,8 @@ public class ProgramCardController implements Initializable {
 
     private void handleDelete(ActionEvent event) {
         ProgramServerInfoService.deleteById(serverInfo.getId());
+        RocketMqConfigService.delete(new LambdaQueryWrapper<RocketMqConfig>()
+                .eq(RocketMqConfig::getProgramId, serverInfo.getId()));
         eventBus.post(new ProgramRefreshEvent());
     }
 

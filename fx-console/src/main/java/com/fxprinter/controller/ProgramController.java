@@ -86,19 +86,6 @@ public class ProgramController implements Initializable {
             //取消显示右键内容
             currentContextMenu.hide();
         });
-        /*currentContextMenu.setOnShown(e -> {
-            Skin<?> skin = currentContextMenu.getSkin();
-            if (skin instanceof ContextMenuSkin contextMenuSkin) {
-                Parent content = (Parent) contextMenuSkin.getNode();
-
-                // 给内容节点添加鼠标移出事件
-                content.addEventFilter(MouseEvent.MOUSE_EXITED, event -> {
-                    //鼠标移出事件
-                    Platform.runLater(()->{
-                    });
-                });
-            }
-        });*/
     }
 
     @Subscribe
@@ -112,9 +99,18 @@ public class ProgramController implements Initializable {
     private void initContextMenu(ContextMenu contextMenu) {
         currentContextMenu.getStyleClass().add("material-context-menu");
         contextMenu.getItems().add(createMenuItem("RocketMQ", "RocketMQ", this::openRocketMQ));
-        contextMenu.getItems().add(createMenuItem("SpringBoot", "springboot", this::openSpringBoot));
-        contextMenu.getItems().add(createMenuItem("WebSocket", "webSocket", this::openWebSocket));
-        contextMenu.getItems().add(createMenuItem("RabbitMQ", "rabbitMQ", this::openRabbitMQ));
+        //SpringBoot
+        MenuItem springBootMenuItem = createMenuItem("SpringBoot", "springboot", this::openSpringBoot);
+        springBootMenuItem.setDisable(true);
+        contextMenu.getItems().add(springBootMenuItem);
+       // WebSocket
+        MenuItem webSocketMenuItem = createMenuItem("WebSocket", "webSocket", this::openWebSocket);
+        webSocketMenuItem.setDisable(true);
+        contextMenu.getItems().add(webSocketMenuItem);
+        //RabbitMQ
+        MenuItem rabbitMqMenuItem = createMenuItem("RabbitMQ", "rabbitMQ", this::openRabbitMQ);
+        rabbitMqMenuItem.setDisable(true);
+        contextMenu.getItems().add(rabbitMqMenuItem);
     }
 
     private MenuItem createMenuItem(String text, String icon, EventHandler<ActionEvent> eventHandler) {

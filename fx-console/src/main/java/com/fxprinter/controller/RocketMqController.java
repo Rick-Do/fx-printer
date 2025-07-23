@@ -105,45 +105,6 @@ public class RocketMqController implements Initializable {
 
     }
 
-    /*private void initListener() {
-        if (namesrv != null) {
-           namesrv.textProperty().addListener((observable, oldValue, newValue) -> {
-            SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
-        });
-        }
-        if (topic != null) {
-            topic.textProperty().addListener((observable, oldValue, newValue) -> {
-                SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
-            });
-        }
-        if (consumerGroup != null) {
-            consumerGroup.textProperty().addListener((observable, oldValue, newValue) -> {
-                SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
-            });
-        }
-        if (tag != null) {
-            tag.textProperty().addListener((observable, oldValue, newValue) -> {
-                SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
-            });
-        }
-        if (messageModel != null) {
-            messageModel.valueProperty().addListener((observable, oldValue, newValue) -> {
-                SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
-            });
-        }
-        if (accessKeyId != null) {
-            accessKeyId.textProperty().addListener((observable, oldValue, newValue) -> {
-                SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
-            });
-        }
-        if (accessKeySecret != null) {
-            accessKeySecret.textProperty().addListener((observable, oldValue, newValue) -> {
-                SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
-            });
-        }
-
-    }*/
-
     private void initMessageModePane() {
         clearButton = new Button();
         clearButton.setGraphic(SvgUtil.loadSvg("downBox", 1D, 1D));
@@ -212,32 +173,6 @@ public class RocketMqController implements Initializable {
     }
 
 
-    /**
-     * 属性是否发送变化
-     * @return  true-是,false-否
-     */
-    /*private boolean isAttitudeChange() {
-        if (!Objects.equals(namesrv.getText(), config.getNamesrv())) {
-            return true;
-        }
-        if (!Objects.equals(topic.getText(), config.getTopic())) {
-            return true;
-        }
-        if (!Objects.equals(tag.getText(), config.getTag())) {
-            return true;
-        }
-        if (!Objects.equals(consumerGroup.getText(), config.getConsumer())) {
-            return true;
-        }
-        if (!Objects.equals(accessKeyId.getText(), config.getAccessKeyId())) {
-            return true;
-        }
-        if (!Objects.equals(accessKeySecret.getText(), config.getAccessKeySecret())) {
-            return true;
-        }
-        return false;
-    }*/
-
     public void handleSave(ActionEvent event)  {
         boolean isSave = Objects.isNull(config.getId());
         config.setNamesrv(namesrv.getText());
@@ -271,20 +206,6 @@ public class RocketMqController implements Initializable {
         serverInfo.setDescription(programDescribe.getText());
         ProgramServerInfoService.updateById(serverInfo);
     }
-
-   /* public void handleCancel(ActionEvent event) {
-        RocketMqConfigService.getConfigById(1, rocketMqConfig -> {
-            if (rocketMqConfig == null) {
-                return;
-            }
-            namesrv.setText(rocketMqConfig.getNamesrv());
-            topic.setText(rocketMqConfig.getTopic());
-            tag.setText(rocketMqConfig.getTag());
-            consumerGroup.setText(rocketMqConfig.getConsumer());
-            accessKeyId.setText(rocketMqConfig.getAccessKeyId());
-            accessKeySecret.setText(rocketMqConfig.getAccessKeySecret());
-        }, throwable -> {});
-    }*/
 
 
 }
