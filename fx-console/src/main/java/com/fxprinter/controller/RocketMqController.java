@@ -72,10 +72,11 @@ public class RocketMqController implements Initializable {
     private Button clearButton;
 
 
-    private static RocketMqConfig config = new RocketMqConfig();
+    private static RocketMqConfig config ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        config = new RocketMqConfig();
         /*if (messageModel != null) {
             initMessageModePane();
         }*/
@@ -84,25 +85,23 @@ public class RocketMqController implements Initializable {
     }
 
     public void initConfigInfo(Integer programId) {
-        PromiseUtil.runInBackground(()->{
-            ProgramServerInfo programServerInfo = ProgramServerInfoService.getById(programId);
-            if (programServerInfo == null) {
-                return;
-            }
-            programName.setText(programServerInfo.getProgramName());
-            programDescribe.setText(programServerInfo.getDescription());
-            RocketMqConfig mqConfig = RocketMqConfigService.getConfigByProgramId(programId);
-            if (mqConfig == null) {
-                return;
-            }
-            config = mqConfig;
-            namesrv.setText(mqConfig.getNamesrv());
-            consumerGroup.setText(mqConfig.getConsumer());
-            topic.setText(mqConfig.getTopic());
-            tag.setText(mqConfig.getTag());
-            accessKeyId.setText(mqConfig.getAccessKeyId());
-            accessKeySecret.setText(mqConfig.getAccessKeySecret());
-        });
+        ProgramServerInfo programServerInfo = ProgramServerInfoService.getById(programId);
+        if (programServerInfo == null) {
+            return;
+        }
+        programName.setText(programServerInfo.getProgramName());
+        programDescribe.setText(programServerInfo.getDescription());
+        RocketMqConfig mqConfig = RocketMqConfigService.getConfigByProgramId(programId);
+        if (mqConfig == null) {
+            return;
+        }
+        config = mqConfig;
+        namesrv.setText(mqConfig.getNamesrv());
+        consumerGroup.setText(mqConfig.getConsumer());
+        topic.setText(mqConfig.getTopic());
+        tag.setText(mqConfig.getTag());
+        accessKeyId.setText(mqConfig.getAccessKeyId());
+        accessKeySecret.setText(mqConfig.getAccessKeySecret());
 
     }
 
@@ -263,16 +262,14 @@ public class RocketMqController implements Initializable {
              RocketMqConfigService.insert(config);
             return;
         }
-        PromiseUtil.runInBackground(()->{
-            RocketMqConfigService.update(config);
-            ProgramServerInfo serverInfo = ProgramServerInfoService.getById(config.getProgramId());
-            if (serverInfo == null) {
-                return;
-            }
-            serverInfo.setProgramName(programName.getText());
-            serverInfo.setDescription(programDescribe.getText());
-            ProgramServerInfoService.updateById(serverInfo);
-        });
+        RocketMqConfigService.update(config);
+        ProgramServerInfo serverInfo = ProgramServerInfoService.getById(config.getProgramId());
+        if (serverInfo == null) {
+            return;
+        }
+        serverInfo.setProgramName(programName.getText());
+        serverInfo.setDescription(programDescribe.getText());
+        ProgramServerInfoService.updateById(serverInfo);
     }
 
    /* public void handleCancel(ActionEvent event) {

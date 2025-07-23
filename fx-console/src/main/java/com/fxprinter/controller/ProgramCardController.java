@@ -231,11 +231,13 @@ public class ProgramCardController implements Initializable {
                     RocketMqController controller = loader.getController();
                     controller.initConfigInfo(serverInfo.getId());
                     CustomDialog dialog = new CustomDialog(node, "修改RabbitMQ");
-                    dialog.setSubmitHandler(controller::handleSave);
+                    dialog.setSubmitHandler(e->{
+                        controller.handleSave(e);
+                        eventBus.post(new ProgramRefreshEvent());
+                    });
                     dialog.show(MainApplication.getPrimaryStage());
                 }
             }
-            eventBus.post(new ProgramRefreshEvent());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
