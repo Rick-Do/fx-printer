@@ -6,12 +6,16 @@ import com.fx.app.entity.BaseParamConfig;
 import com.fx.app.entity.ProgramServerInfo;
 import com.fxprinter.model.OptionItem;
 import com.fxprinter.service.BaseParamConfigService;
+import com.fxprinter.state.SettingButtonState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.DirectoryChooser;
 import javafx.util.Callback;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,6 +36,12 @@ public class BasicParamController implements Initializable {
     @FXML
     public ComboBox<OptionItem> language;
 
+    @FXML
+    public TextField directoryPath;
+
+    @FXML
+    public Button browseButton;
+
     private BaseParamConfig config;
 
     @Override
@@ -40,12 +50,21 @@ public class BasicParamController implements Initializable {
         config = BaseParamConfigService.getConfig();
         if (config == null) {
             config = new BaseParamConfig();
+            //默认简体中文
+            config.setLanguage("SimpleChinese");
+            //默认浅色模式
+            config.setDarkMode("light");
         }
         //初始化语言配置
         initLanguage();
         //初始化深色模式配置
         initDarkMode();
+        directoryPath.setText(config.getFileSavePath());
+
+        SettingButtonState.getInstance().saveButtonProperty().setOnMouseClicked(this::handleSave);
+        SettingButtonState.getInstance().cancelButtonProperty().setOnMouseClicked(this::handleCancel);
     }
+
 
     private void initDarkMode() {
         String darkMode = config.getDarkMode();
@@ -61,18 +80,19 @@ public class BasicParamController implements Initializable {
         });
     }
 
+
     private void initLanguage() {
         if (StrUtil.isNotEmpty(config.getLanguage())) {
             Optional<OptionItem> first = language.getItems().stream().filter(item -> item.getValue().equals(config.getLanguage())).findFirst();
             first.ifPresent(optionItem -> language.getSelectionModel().select(optionItem));
-        }else {
-            language.getSelectionModel().select(0);
         }
         language.setOnAction(this::handleLanguageChange);
     }
 
     private void handleLanguageChange(ActionEvent event) {
-        config.setLanguage(language.getValue().getValue());
+        String languageVal = language.getValue().getValue();
+        //如果语言配置项与之前不同，则保存
+        config.setLanguage(languageVal);
         BaseParamConfigService.saveOrUpdate(config);
     }
 
@@ -127,6 +147,45 @@ public class BasicParamController implements Initializable {
             }
         });
     }
+
+
+    @FXML
+    private void onBrowseButtonClick(ActionEvent event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("选择打印文件存储目录");
+
+        // 设置初始目录（可选）
+        if (directoryPath.getText() != null && !directoryPath.getText().isEmpty()) {
+            File initialDir = new File(directoryPath.getText());
+            if (initialDir.exists()) {
+                directoryChooser.setInitialDirectory(initialDir);
+            }
+        }
+
+        File selectedDirectory = directoryChooser.showDialog(browseButton.getScene().getWindow());
+
+        if (selectedDirectory != null) {
+            String absolutePath = selectedDirectory.getAbsolutePath();
+            directoryPath.setText(absolutePath);
+            SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
+        }
+    }
+
+    private void handleCancel(MouseEvent mouseEvent) {
+        directoryPath.setText(config.getFileSavePath());
+        SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
+    }
+
+    private void handleSave(MouseEvent mouseEvent) {
+        config.setFileSavePath(directoryPath.getText());
+        BaseParamConfigService.saveOrUpdate(config);
+        SettingButtonState.getInstance().changeShowState(this::isAttitudeChange);
+    }
+
+    private Boolean isAttitudeChange() {
+        return !Objects.equals(config.getFileSavePath(), directoryPath.getText());
+    }
+
 
 
 }

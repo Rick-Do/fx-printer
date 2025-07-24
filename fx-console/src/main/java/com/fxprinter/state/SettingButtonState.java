@@ -57,6 +57,9 @@ public class SettingButtonState {
         if (visible && change) {
             return;
         }
+        if (!visible && !change) {
+            return;
+        }
         SettingButtonState.getInstance().settingButtonProperty().setVisible(true);
         FadeTransition fade = new FadeTransition(Duration.millis(duration), SettingButtonState.getInstance().settingButtonProperty());
         fade.setFromValue(change ? 0.0 : 1.0);

@@ -70,10 +70,11 @@
 
 .baseParam-textfield {
     -fx-pref-width: 400px;
+    -fx-padding: 8px 20px;
     -fx-background-color: white;
     -fx-border-color: #cccccc;
     -fx-border-radius: 4px;
-    -fx-padding: 5px;
+    -fx-font-size: 14px;
 }
 
 .baseParam-spinner {

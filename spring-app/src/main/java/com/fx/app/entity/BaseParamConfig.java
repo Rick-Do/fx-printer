@@ -28,6 +28,9 @@ public class BaseParamConfig {
     @TableField(value = "dark_mode")
     private String darkMode;
 
+    @TableField(value = "file_save_path")
+    private String fileSavePath;
+
     @TableField(value = "create_time")
     private Date createTime;
 

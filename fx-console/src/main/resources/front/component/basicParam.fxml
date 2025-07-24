@@ -30,7 +30,7 @@
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <OptionItem value="SimpleChinese" label="简体中文"  />
-                        <OptionItem value="English" label="English" />
+                        <OptionItem value="English" disabled="true" label="English" />
                         <OptionItem value="Japanese" disabled="true" label="日本語" />
                         <OptionItem value="Vietnam" disabled="true" label="Español" />
                     </FXCollections>
@@ -48,8 +48,19 @@
             </fx:define>
             <HBox spacing="20" style="-fx-border-width: 1">
                 <RadioButton text="浅色" userData="light" selected="true" toggleGroup="$darkModeGroup" styleClass="baseParam-radio" />
-                <RadioButton text="黑暗" userData="dark" toggleGroup="$darkModeGroup" styleClass="baseParam-radio" />
+                <RadioButton text="黑暗" userData="dark" toggleGroup="$darkModeGroup" disable="true" styleClass="baseParam-radio" />
             </HBox>
+        </VBox>
+
+        <VBox spacing="8" styleClass="baseParam-section">
+            <Label text="打印文件存储目录" styleClass="baseParam-section-title" />
+            <HBox spacing="10" alignment="CENTER_LEFT" >
+                <TextField fx:id="directoryPath" promptText="请选择目录" HBox.hgrow="ALWAYS" styleClass="baseParam-textfield" editable="false" />
+                <Button fx:id="browseButton" text="浏览" onAction="#onBrowseButtonClick" styleClass="baseParam-btn" />
+            </HBox>
+            <Label text="设置打印文件的存储位置" styleClass="baseParam-description" />
+
+
         </VBox>
 
     </VBox>
