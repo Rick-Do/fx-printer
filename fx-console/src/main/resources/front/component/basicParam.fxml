@@ -29,10 +29,10 @@
             <ComboBox promptText="简体中文" styleClass="baseParam-combobox" fx:id="language">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <OptionItem value="简体中文" />
-                        <OptionItem value="English" disabled="true" />
-                        <OptionItem value="日本語" disabled="true" />
-                        <OptionItem value="Español" disabled="true" />
+                        <OptionItem value="SimpleChinese" label="简体中文"  />
+                        <OptionItem value="English" label="English" />
+                        <OptionItem value="Japanese" disabled="true" label="日本語" />
+                        <OptionItem value="Vietnam" disabled="true" label="Español" />
                     </FXCollections>
                 </items>
             </ComboBox>
@@ -47,8 +47,8 @@
                 <ToggleGroup fx:id="darkModeGroup" />
             </fx:define>
             <HBox spacing="20" style="-fx-border-width: 1">
-                <RadioButton text="浅色" selected="true" toggleGroup="$darkModeGroup" styleClass="baseParam-radio" />
-                <RadioButton text="黑暗" toggleGroup="$darkModeGroup" styleClass="baseParam-radio" disable="true" />
+                <RadioButton text="浅色" userData="light" selected="true" toggleGroup="$darkModeGroup" styleClass="baseParam-radio" />
+                <RadioButton text="黑暗" userData="dark" toggleGroup="$darkModeGroup" styleClass="baseParam-radio" />
             </HBox>
         </VBox>
 

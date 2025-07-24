@@ -5,6 +5,7 @@ import cn.hutool.core.collection.ListUtil;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import com.fx.app.entity.BaseParamConfig;
 import com.fx.app.entity.ProgramServerInfo;
 import com.fx.app.entity.RocketMqConfig;
 import com.zaxxer.hikari.HikariConfig;
@@ -72,7 +73,8 @@ public class DbUtil {
             AutomationSchemaValidator validator = new AutomationSchemaValidator(jdbcTemplate);
             validator.registerEntity(ListUtil.toList(
                     ProgramServerInfo.class,
-                    RocketMqConfig.class
+                    RocketMqConfig.class,
+                    BaseParamConfig.class
             ));
 
         } catch (Exception e) {

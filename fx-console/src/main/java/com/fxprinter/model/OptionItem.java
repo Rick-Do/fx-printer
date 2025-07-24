@@ -16,12 +16,18 @@ public class OptionItem {
 
     private final StringProperty value = new SimpleStringProperty();
     private final BooleanProperty disabled = new SimpleBooleanProperty(false);
+    private final StringProperty label = new SimpleStringProperty();
 
     public OptionItem() {
     }
 
     public OptionItem(String value) {
         this.value.set(value);
+    }
+
+    public OptionItem(String value, String label) {
+        this.value.set(value);
+        this.label.set(label);
     }
 
     public OptionItem(String value, boolean disabled) {
@@ -33,12 +39,24 @@ public class OptionItem {
         return value.get();
     }
 
+    public String getLabel() {
+        return label.get();
+    }
+
+    public StringProperty labelProperty() {
+        return label;
+    }
+
     public StringProperty valueProperty() {
         return value;
     }
 
     public void setValue(String value) {
         this.value.set(value);
+    }
+
+    public void setLabel(String label) {
+        this.label.set(label);
     }
 
     public boolean isDisabled() {
@@ -55,7 +73,7 @@ public class OptionItem {
 
     @Override
     public String toString() {
-        return getValue();
+        return getValue() + " " + getLabel();
     }
 
 }
